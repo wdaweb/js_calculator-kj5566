@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-image: url(./4026633.jpg);
+
+
+
+
+
+    }
+
+    table {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #a3c7d1;
+      border-radius: 20px;
+
+    }
+
+    th {
+      height: 50px;
+
+    }
+
+    tr {
+
+
+      background: linear-gradient(#79fafc, #a3c7d1);
+        
+    }
+
+
+    td {
+
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      border-radius: 50%;
+
+
+    }
+
+
+    td:hover {
+      transform: scale(1.5);
+    }
+  </style>
+</head>
+
+<body>
+  <table>
+    <tr>
+      <td colspan="4" id="text"> 0</td>
+    </tr>
+    <th colspan="4" style="background-color:#a3c7d1 ;"><img src="https://picsum.photos/210/50/?random=10">
+
+    </th>
+    <tr>
+      <td style="background-color:#ffba3b ;">C</td>
+      <td style="background-color:#ffba3b ;">/</td>
+      <td style="background-color:#ffba3b ;">*</td>
+      <td style="background-color:#ffba3b ;">-</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td rowspan="2" style="background-color:#ffba3b ;">+</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td rowspan="2" style="background-color:#ffba3b ;"> = </td>
+    </tr>
+    <tr>
+      <td colspan="2">0</td>
+      <td>.</td>
+
+
+    </tr>
+  </table>
+  <script>
+    const text = document.getElementById('text')
+    const btns = document.querySelectorAll('td:not(#text)')
+
+    for (const btn of btns) {
+      btn.onclick = () => {
+        const btnText = btn.innerText
+        if (btnText === '=') {
+          text.innerText = eval(text.innerText)
+
+        }
+        else if (btnText === 'C') {
+          text.innerText = '0'
+
+        } else {
+          if (text.innerText === '-' && isNaN(parseInt(btnText))) return
+          if (text.innerText !== '0') {
+            text.innerText += btnText
+          } else if (!['+', '*', '/'].includes(btnText)) {
+            text.innerText = btnText
+          }
+        }
+      }
+    }
+
+    document.onkeydown = event => {
+      const btnText = event.key
+      if (btnText === 'Enter' || btnText === '=') {
+        text.innerText = eval(text.innerText)
+      } else if (btnText === 'C') {
+        text.innerText = '0'
+      } else {
+        if (text.innerText === '-' && isNaN(parseInt(btnText))) return
+
+        if (text.innerText !== '0') {
+          text.innerText += btnText
+        } else if (!['+', '*', '/'].includes(btnText)) {
+          text.innerText = btnText
+        }
+
+      }
+    }
+  </script>
+</body>
+
+</html>
